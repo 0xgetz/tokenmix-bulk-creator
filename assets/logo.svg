@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="TokenMix Bulk Creator logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#131a33"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="0.5" stop-color="#39d0ff"/>
+      <stop offset="1" stop-color="#22e6a5"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#39d0ff"/>
+      <stop offset="1" stop-color="#22e6a5"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="640" rx="140" fill="url(#bg)"/>
+
+  <!-- stacked account cards -->
+  <g opacity="0.9">
+    <rect x="150" y="250" width="340" height="120" rx="26" fill="#1b2444" stroke="#33508f" stroke-width="3"/>
+    <rect x="150" y="300" width="340" height="120" rx="26" fill="#20305e" stroke="#3e6bd6" stroke-width="3"/>
+    <rect x="150" y="350" width="340" height="130" rx="26" fill="#27407f" stroke="#4f86ff" stroke-width="3"/>
+  </g>
+
+  <!-- top card: keyhole + spark -->
+  <g filter="url(#glow)">
+    <circle cx="320" cy="250" r="52" fill="none" stroke="url(#ring)" stroke-width="12"/>
+    <circle cx="320" cy="250" r="18" fill="url(#flame)"/>
+    <rect x="314" y="262" width="12" height="40" rx="6" fill="url(#flame)"/>
+  </g>
+
+  <!-- accounts rows on lower card -->
+  <g fill="#9fd0ff" opacity="0.95">
+    <circle cx="196" cy="415" r="10" fill="url(#ring)"/>
+    <rect x="218" y="406" width="150" height="12" rx="6"/>
+    <rect x="218" y="426" width="90" height="10" rx="5" opacity="0.6"/>
+  </g>
+  <g fill="#22e6a5" opacity="0.95">
+    <circle cx="196" cy="455" r="10"/>
+    <rect x="218" y="446" width="120" height="12" rx="6" fill="#9fd0ff"/>
+  </g>
+
+  <!-- lightning of automation -->
+  <path d="M418 300 L372 384 L404 384 L378 452 L452 356 L416 356 Z"
+        fill="url(#flame)" opacity="0.95" filter="url(#glow)"/>
+</svg>

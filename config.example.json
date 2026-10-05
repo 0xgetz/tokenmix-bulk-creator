@@ -1,0 +1,15 @@
+# Example bulk run configuration (JSON).
+# Copy to config.json and adjust. Use --config config.json on the CLI.
+{
+  "count": 5,
+  "concurrency": 1,
+  "output": "output/accounts.json",
+  "csv_output": "output/accounts.csv",
+  "headless": false,
+  "browser": "chromium",
+  "retries": 2,
+  "code_timeout": 150,
+  "key_name_prefix": "prod",
+  "mail_domain": null,
+  "referral_code": null
+}
