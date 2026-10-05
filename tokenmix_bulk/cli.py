@@ -18,8 +18,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="tokenmix-bulk",
         description=(
-            "Bulk-create TokenMix accounts with disposable mail.tm inboxes and "
-            "auto-generate API keys with randomised names."
+            "Bulk-create TokenMix accounts with disposable temp-mail.io inboxes "
+            "and auto-generate API keys with randomised names."
         ),
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
@@ -31,8 +31,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--key-prefix", dest="key_name_prefix", default=None,
                         help="prefix for generated key names")
     parser.add_argument("--referral", dest="referral_code", default=None, help="referral code")
+    parser.add_argument("--mail-provider", dest="mail_provider", default="temp-mail-io",
+                        choices=["temp-mail-io", "mail-tm"],
+                        help="disposable mail provider")
     parser.add_argument("--mail-domain", dest="mail_domain", default=None,
-                        help="pin a specific mail.tm domain")
+                        help="pin a specific mail provider domain")
+    parser.add_argument("--mail-base-url", dest="mail_base_url", default=None,
+                        help="override the mail provider API base URL")
     parser.add_argument("--headless", action="store_true", help="run the browser headless")
     parser.add_argument("--browser", default="chromium",
                         choices=["chromium", "firefox", "webkit"], help="browser engine")
@@ -55,9 +60,9 @@ def config_from_args(args: argparse.Namespace) -> RunConfig:
         overrides = vars(args)
         for key in (
             "count", "concurrency", "output", "csv_output", "password",
-            "key_name_prefix", "referral_code", "mail_domain", "headless",
-            "browser", "proxy", "retries", "stop_on_error", "timeout",
-            "code_timeout", "verbose",
+            "key_name_prefix", "referral_code", "mail_domain", "mail_provider",
+            "mail_base_url", "headless", "browser", "proxy", "retries",
+            "stop_on_error", "timeout", "code_timeout", "verbose",
         ):
             value = overrides.get(key)
             if value not in (None, False):
@@ -71,7 +76,9 @@ def config_from_args(args: argparse.Namespace) -> RunConfig:
         password=args.password,
         key_name_prefix=args.key_name_prefix,
         referral_code=args.referral_code,
+        mail_provider=args.mail_provider,
         mail_domain=args.mail_domain,
+        mail_base_url=args.mail_base_url or "",
         headless=args.headless,
         browser=args.browser,
         proxy=args.proxy,

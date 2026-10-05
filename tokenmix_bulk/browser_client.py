@@ -31,6 +31,16 @@ class RegistrationBlocked(TokenMixError):
     """Raised when the site refuses registration (Turnstile / risk control)."""
 
 
+class DomainNotSupported(TokenMixError):
+    """Raised when TokenMix rejects the inbox domain as disposable.
+
+    TokenMix maintains a block-list of throwaway-mail domains. When the
+    supplied address uses one of them the API answers with
+    ``400 This email provider is not supported``. Retrying with the same
+    domain cannot succeed; use a different provider or a custom domain.
+    """
+
+
 @dataclass
 class Session:
     """Authenticated session material returned by the register/login calls."""
@@ -264,6 +274,16 @@ class TokenMixBrowser:
                 message = payload.get("message") or str(payload.get("error") or "")
             if status == 400 and "verification" in message.lower():
                 raise RegistrationBlocked(message or "Turnstile verification failed")
+            if status == 400 and (
+                "not supported" in message.lower()
+                or "disposable" in message.lower()
+                or "mainstream" in message.lower()
+            ):
+                raise DomainNotSupported(message)
+            if status == 429:
+                raise RegistrationBlocked(
+                    message or "rate limited by TokenMix; retry later"
+                )
             raise TokenMixError(f"HTTP {status} for {path}: {message or payload}")
         return payload or {}
 

@@ -13,7 +13,9 @@ from tokenmix_bulk.identity import (
     random_password,
     random_username,
 )
+from tokenmix_bulk.providers import DEFAULT_PROVIDER, PROVIDERS, MailboxProvider
 from tokenmix_bulk.results import AccountResult, ResultStore
+from tokenmix_bulk.temp_mail_io import Message as TempMessage
 
 
 def test_random_password_policy():
@@ -75,3 +77,34 @@ def test_result_store_exports(tmp_path):
     csv_text = (tmp_path / "a.csv").read_text(encoding="utf-8")
     assert "sk-tm-test" in csv_text
     assert "boom" in csv_text
+
+
+def test_default_provider_is_temp_mail_io():
+    assert DEFAULT_PROVIDER == "temp-mail-io"
+    assert "temp-mail-io" in PROVIDERS
+
+
+def test_provider_rejects_unknown():
+    with pytest.raises(ValueError):
+        MailboxProvider("nope")
+
+
+def test_provider_defaults_to_temp_mail_io():
+    provider = MailboxProvider()
+    assert provider.name == "temp-mail-io"
+
+
+def test_temp_mail_io_code_extraction():
+    message = TempMessage(
+        id="1",
+        sender="TokenMix <support@tokenmix.ai>",
+        subject="TokenMix - Verification Code",
+        body_text="Please use the verification code below.\n\n482915\n\nvalid 5 minutes",
+    )
+    assert message.code == "482915"
+
+
+def test_config_defaults_use_temp_mail_provider():
+    config = RunConfig()
+    assert config.mail_provider == "temp-mail-io"
+    assert "temp-mail.io" in config.mail_base_url

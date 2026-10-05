@@ -21,7 +21,7 @@
 ---
 
 `tokenmix-bulk` ties three things together in one reproducible pipeline: a
-disposable mailbox provider ([mail.tm](https://mail.tm)), a real browser that
+disposable mailbox provider ([temp-mail.io](https://temp-mail.io)), a real browser that
 clears the Cloudflare Turnstile challenge, and the TokenMix REST API. Feed it a
 count, and it returns a JSON/CSV table of ready-to-use `sk-tm-...` keys.
 
@@ -43,7 +43,7 @@ browser context using `fetch`.
 
 ## Features
 
-- **Disposable mailboxes** – creates a unique mail.tm inbox per account.
+- **Disposable mailboxes** – creates a unique temp-mail.io inbox per account.
 - **Turnstile-aware** – renders an invisible widget and mints a fresh
   single-use token for every server call.
 - **Random identity** – usernames, passwords and key names are unpredictable.
@@ -61,7 +61,9 @@ tokenmix_bulk/
 ├── cli.py             # argparse CLI entry point
 ├── config.py          # RunConfig dataclass + JSON/YAML loading
 ├── identity.py        # random usernames, passwords, key names
-├── mailtm.py          # mail.tm REST client (accounts, messages, codes)
+├── temp_mail_io.py    # temp-mail.io REST client (inboxes, messages, codes)
+├── mailtm.py          # optional mail.tm fallback client
+├── providers.py       # uniform provider facade
 ├── browser_client.py  # Playwright client: Turnstile + TokenMix REST calls
 ├── orchestrator.py    # end-to-end flow, retries, concurrency
 ├── results.py         # result models + JSON/CSV persistence
@@ -110,7 +112,8 @@ tokenmix-bulk --config config.example.json
 | `--password` | random | Fixed password for all accounts |
 | `--key-prefix` | random | Prefix for generated key names |
 | `--referral` | – | Referral code to submit |
-| `--mail-domain` | auto | Pin a mail.tm domain |
+| `--mail-provider` | `temp-mail-io` | `temp-mail-io` \| `mail-tm` |
+| `--mail-domain` | auto | Pin a mail provider domain |
 | `--headless` | off | Run the browser headless |
 | `--browser` | `chromium` | `chromium` \| `firefox` \| `webkit` |
 | `--proxy` | – | Proxy URL for the browser |
@@ -118,6 +121,28 @@ tokenmix-bulk --config config.example.json
 | `--stop-on-error` | off | Abort the batch on first failure |
 | `--config` | – | Load a JSON/YAML config file |
 | `-v, --verbose` | off | Debug logging |
+
+## Providers & domain support
+
+Two disposable-mail providers are bundled:
+
+| Provider | Flag value | API |
+| --- | --- | --- |
+| temp-mail.io *(default)* | `temp-mail-io` | `api.internal.temp-mail.io/api/v3` |
+| mail.tm *(fallback)* | `mail-tm` | `api.mail.tm` |
+
+TokenMix runs an anti-abuse filter that rejects many throwaway-mail domains
+with `400 This email provider is not supported. Please use a mainstream or work
+email`. When that happens the run marks the account as failed with
+`DomainNotSupported` and **does not retry** the same domain — retrying cannot
+help. If your provider domain is on the block-list:
+
+1. Try the other provider, or pin a specific domain with `--mail-domain`.
+2. Point `--mail-base-url` at a provider you control, or run your own domain.
+3. Slow the batch down; TokenMix also enforces a global registration rate
+   limit and answers `429 Too many registration attempts` when it is exceeded.
+
+A separate `429` is treated as retryable and respects `--retries`.
 
 ## Output
 

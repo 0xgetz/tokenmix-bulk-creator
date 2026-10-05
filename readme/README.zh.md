@@ -20,7 +20,7 @@ TokenMix 使用 **Cloudflare Turnstile** 验证来保护注册。普通 HTTP 客
 
 ## 特性
 
-- 为每个账号创建一次性 mail.tm 邮箱
+- 为每个账号创建一次性 temp-mail.io 邮箱
 - 感知 Turnstile，生成一次性令牌
 - 随机用户名、密码与密钥名称
 - 自动创建形如 `prod-swift-falcon-a1b2` 的 API 密钥

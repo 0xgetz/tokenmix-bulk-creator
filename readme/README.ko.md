@@ -20,7 +20,7 @@ TokenMix는 **Cloudflare Turnstile** 챌린지로 가입을 보호합니다. 일
 
 ## 기능
 
-- 계정별 일회용 mail.tm 받은편지함
+- 계정별 일회용 temp-mail.io 받은편지함
 - Turnstile 대응 일회용 토큰 생성
 - 무작위 사용자명, 비밀번호, 키 이름
 - `prod-swift-falcon-a1b2` 형식의 API 키 자동 생성

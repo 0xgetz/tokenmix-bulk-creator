@@ -8,11 +8,11 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Callable
 
-from .browser_client import TokenMixBrowser, TokenMixError
+from .browser_client import DomainNotSupported, TokenMixBrowser, TokenMixError
 from .config import RunConfig
-from .identity import random_email, random_key_name, random_password, random_username
+from .identity import random_key_name, random_password, random_username
 from .logging_utils import get_logger
-from .mailtm import MailTmClient, MailTmError
+from .providers import MailboxProvider
 from .results import AccountResult, ResultStore
 
 logger = get_logger("tokenmix_bulk")
@@ -39,13 +39,14 @@ class BulkCreator:
         """Run the full flow (mailbox -> register -> key) for one account."""
 
         config = self.config
-        mail = MailTmClient(config.mail_base_url)
+        mail = MailboxProvider(
+            config.mail_provider, base_url=config.mail_base_url or None
+        )
         domain = config.mail_domain or mail.pick_domain()
         username = random_username()
-        email = random_email(domain, username)
         password = config.password or random_password()
         result = AccountResult(
-            index=index, email=email, password=password, username=username
+            index=index, email="", password=password, username=username
         )
 
         last_error: Exception | None = None
@@ -53,10 +54,11 @@ class BulkCreator:
             result.attempts = attempt
             try:
                 logger.info(
-                    "[%d] (%d/%d) creating mailbox %s", index, attempt, config.retries, email
+                    "[%d] (%d/%d) creating %s inbox", index, attempt,
+                    config.retries, config.mail_provider,
                 )
-                mailbox = mail.create_account(email, password)
-                email = mailbox.address
+                inbox = mail.create_inbox(name=username, domain=domain)
+                email = inbox.address
                 result.email = email
 
                 with TokenMixBrowser(config) as client:
@@ -64,7 +66,7 @@ class BulkCreator:
                     client.send_verification_code(email)
                     seen: set[str] = set()
                     code = mail.wait_for_code(
-                        mailbox,
+                        inbox,
                         timeout=config.code_timeout,
                         seen=seen,
                     )
@@ -90,18 +92,22 @@ class BulkCreator:
                 result.finish("success")
                 logger.info("[%d] success -> %s", index, key_name)
                 return result
-            except (TokenMixError, MailTmError, Exception) as exc:  # noqa: BLE001
+            except Exception as exc:  # noqa: BLE001
                 last_error = exc
                 logger.warning("[%d] attempt %d failed: %s", index, attempt, exc)
+                if isinstance(exc, DomainNotSupported):
+                    logger.error(
+                        "[%d] TokenMix rejects this inbox domain as disposable; "
+                        "aborting this account. Use a different --mail-provider "
+                        "or a custom --mail-domain.", index,
+                    )
+                    break
                 if runtime_is_fatal(exc):
                     break
                 if attempt < config.retries:
                     time.sleep(2.0 * attempt)
                     # New mailbox identity avoids verification-code collisions.
                     username = random_username()
-                    email = random_email(domain, username)
-                    result.email = email
-                    result.username = username
 
         result.finish("failed", error=str(last_error) if last_error else "unknown error")
         return result
@@ -152,4 +158,6 @@ def runtime_is_fatal(exc: BaseException) -> bool:
         "cannot find module",
         "unsupported browser",
     )
-    return any(marker in message for marker in fatal_markers)
+    return isinstance(exc, DomainNotSupported) or any(
+        marker in message for marker in fatal_markers
+    )

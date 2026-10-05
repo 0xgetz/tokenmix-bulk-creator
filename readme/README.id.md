@@ -20,7 +20,7 @@ TokenMix melindungi pendaftaran dengan tantangan **Cloudflare Turnstile**. Klien
 
 ## Fitur
 
-- Inbox mail.tm sekali pakai untuk setiap akun
+- Inbox temp-mail.io sekali pakai untuk setiap akun
 - Sadar Turnstile dengan token sekali pakai
 - Username, kata sandi, dan nama key yang acak
 - API key otomatis bernama seperti `prod-swift-falcon-a1b2`

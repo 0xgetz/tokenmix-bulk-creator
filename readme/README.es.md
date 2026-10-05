@@ -20,7 +20,7 @@ TokenMix protege el registro con un desafío de **Cloudflare Turnstile**. Un cli
 
 ## Características
 
-- Bandeja mail.tm desechable por cuenta
+- Bandeja temp-mail.io desechable por cuenta
 - Consciente de Turnstile con tokens de un solo uso
 - Nombres de usuario, contraseñas y claves aleatorios
 - Claves API automáticas como `prod-swift-falcon-a1b2`

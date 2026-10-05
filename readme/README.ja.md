@@ -20,7 +20,7 @@ TokenMix は登録を **Cloudflare Turnstile** で保護しています。通常
 
 ## 機能
 
-- アカウントごとに mail.tm の使い捨て受信トレイ
+- アカウントごとに temp-mail.io の使い捨て受信トレイ
 - Turnstile 対応の単発トークン生成
 - ランダムなユーザー名・パスワード・キー名
 - `prod-swift-falcon-a1b2` 形式の API キーを自動作成

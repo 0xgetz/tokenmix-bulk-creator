@@ -39,8 +39,9 @@ def random_username(separator: str = ".") -> str:
 def random_email(domain: str, username: str | None = None) -> str:
     """Build a random address for ``domain``.
 
-    mail.tm strips dots from the local part, so the generated local part uses a
-    single dot between the two words and a short alphanumeric suffix.
+    A single dot separates the two words and a short alphanumeric suffix is
+    appended. Both supported providers accept this shape (mail.tm strips dots
+    server-side; temp-mail.io keeps them).
     """
 
     local = username or random_username(separator=".")

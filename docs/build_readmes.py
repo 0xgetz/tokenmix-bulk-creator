@@ -56,7 +56,7 @@ TEMPLATES = {
         "why_p": "TokenMix protects registration with a **Cloudflare Turnstile** challenge. A plain HTTP client is rejected, so this project drives a real browser with Playwright, solves the challenge naturally, then performs the authenticated REST calls from inside that browser context.",
         "features_h": "Features",
         "features": [
-            "Disposable mail.tm inbox per account",
+            "Disposable temp-mail.io inbox per account",
             "Turnstile-aware single-use token generation",
             "Random usernames, passwords and key names",
             "Auto-created API keys named like `prod-swift-falcon-a1b2`",
@@ -86,7 +86,7 @@ TEMPLATES = {
         "why_p": "TokenMix melindungi pendaftaran dengan tantangan **Cloudflare Turnstile**. Klien HTTP biasa akan ditolak, sehingga proyek ini mengendalikan browser asli via Playwright, menyelesaikan tantangan secara alami, lalu menjalankan panggilan REST terautentikasi dari dalam konteks browser tersebut.",
         "features_h": "Fitur",
         "features": [
-            "Inbox mail.tm sekali pakai untuk setiap akun",
+            "Inbox temp-mail.io sekali pakai untuk setiap akun",
             "Sadar Turnstile dengan token sekali pakai",
             "Username, kata sandi, dan nama key yang acak",
             "API key otomatis bernama seperti `prod-swift-falcon-a1b2`",
@@ -116,7 +116,7 @@ TEMPLATES = {
         "why_p": "TokenMix 使用 **Cloudflare Turnstile** 验证来保护注册。普通 HTTP 客户端会被拒绝，因此本项目通过 Playwright 驱动真实浏览器，自然通过验证，然后在浏览器上下文中执行带认证的 REST 调用。",
         "features_h": "特性",
         "features": [
-            "为每个账号创建一次性 mail.tm 邮箱",
+            "为每个账号创建一次性 temp-mail.io 邮箱",
             "感知 Turnstile，生成一次性令牌",
             "随机用户名、密码与密钥名称",
             "自动创建形如 `prod-swift-falcon-a1b2` 的 API 密钥",
@@ -146,7 +146,7 @@ TEMPLATES = {
         "why_p": "TokenMix は登録を **Cloudflare Turnstile** で保護しています。通常の HTTP クライアントは拒否されるため、本プロジェクトは Playwright で実ブラウザを操作し、チャレンジを自然に通過してから、認証済み REST 呼び出しをブラウザコンテキスト内で実行します。",
         "features_h": "機能",
         "features": [
-            "アカウントごとに mail.tm の使い捨て受信トレイ",
+            "アカウントごとに temp-mail.io の使い捨て受信トレイ",
             "Turnstile 対応の単発トークン生成",
             "ランダムなユーザー名・パスワード・キー名",
             "`prod-swift-falcon-a1b2` 形式の API キーを自動作成",
@@ -176,7 +176,7 @@ TEMPLATES = {
         "why_p": "TokenMix는 **Cloudflare Turnstile** 챌린지로 가입을 보호합니다. 일반 HTTP 클라이언트는 거부되므로, 이 프로젝트는 Playwright로 실제 브라우저를 구동해 챌린지를 자연스럽게 통과한 뒤 브라우저 컨텍스트에서 인증된 REST 호출을 수행합니다.",
         "features_h": "기능",
         "features": [
-            "계정별 일회용 mail.tm 받은편지함",
+            "계정별 일회용 temp-mail.io 받은편지함",
             "Turnstile 대응 일회용 토큰 생성",
             "무작위 사용자명, 비밀번호, 키 이름",
             "`prod-swift-falcon-a1b2` 형식의 API 키 자동 생성",
@@ -206,7 +206,7 @@ TEMPLATES = {
         "why_p": "TokenMix protege el registro con un desafío de **Cloudflare Turnstile**. Un cliente HTTP simple es rechazado, así que este proyecto controla un navegador real con Playwright, resuelve el desafío de forma natural y luego ejecuta las llamadas REST autenticadas dentro de ese contexto.",
         "features_h": "Características",
         "features": [
-            "Bandeja mail.tm desechable por cuenta",
+            "Bandeja temp-mail.io desechable por cuenta",
             "Consciente de Turnstile con tokens de un solo uso",
             "Nombres de usuario, contraseñas y claves aleatorios",
             "Claves API automáticas como `prod-swift-falcon-a1b2`",

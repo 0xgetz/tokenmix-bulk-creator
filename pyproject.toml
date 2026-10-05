@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tokenmix-bulk-creator"
-version = "1.0.0"
+version = "1.1.0"
 description = "Bulk-provision TokenMix accounts with disposable inboxes and auto-generate API keys with random names."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -12,7 +12,7 @@ license = { text = "MIT" }
 authors = [{ name = "TokenMix Bulk Creator Contributors" }]
 keywords = [
     "tokenmix", "bulk-registration", "automation", "playwright",
-    "api-keys", "mail-tm", "open-source", "llm-gateway",
+    "api-keys", "temp-mail-io", "mail-tm", "open-source", "llm-gateway",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",

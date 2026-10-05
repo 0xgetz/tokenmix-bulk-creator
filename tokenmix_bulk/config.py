@@ -9,7 +9,8 @@ from typing import Any
 
 DEFAULT_BASE_URL = "https://api.tokenmix.ai"
 DEFAULT_SITE_URL = "https://tokenmix.ai"
-DEFAULT_MAIL_BASE_URL = "https://api.mail.tm"
+DEFAULT_MAIL_PROVIDER = "temp-mail-io"
+DEFAULT_MAIL_BASE_URL = "https://api.internal.temp-mail.io/api/v3"
 
 
 @dataclass
@@ -22,6 +23,7 @@ class RunConfig:
     key_name_prefix: str | None = None
     referral_code: str | None = None
     mail_domain: str | None = None
+    mail_provider: str = DEFAULT_MAIL_PROVIDER
     base_url: str = DEFAULT_BASE_URL
     site_url: str = DEFAULT_SITE_URL
     mail_base_url: str = DEFAULT_MAIL_BASE_URL

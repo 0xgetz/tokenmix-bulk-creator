@@ -10,6 +10,7 @@
   "retries": 2,
   "code_timeout": 150,
   "key_name_prefix": "prod",
+  "mail_provider": "temp-mail-io",
   "mail_domain": null,
   "referral_code": null
 }
