@@ -10,7 +10,7 @@
 
 > Buat akun TokenMix secara massal dengan inbox sekali pakai dan pembuatan API key otomatis bernama acak.
 
-<p>[English](../README.md) · **Indonesia** · [简体中文](README.zh.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md)</p>
+<p><a href="../README.md">English</a> · <strong>Indonesia</strong> · <a href="README.zh.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a></p>
 
 ---
 

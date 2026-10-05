@@ -10,7 +10,7 @@
 
 > 使い捨て受信トレイで TokenMix アカウントを一括作成し、ランダム名の API キーを自動生成します。
 
-<p>[English](../README.md) · [Indonesia](README.id.md) · [简体中文](README.zh.md) · **日本語** · [한국어](README.ko.md) · [Español](README.es.md)</p>
+<p><a href="../README.md">English</a> · <a href="README.id.md">Indonesia</a> · <a href="README.zh.md">简体中文</a> · <strong>日本語</strong> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a></p>
 
 ---
 

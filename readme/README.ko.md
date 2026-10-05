@@ -10,7 +10,7 @@
 
 > 일회용 받은편지함으로 TokenMix 계정을 대량 생성하고 무작위 이름의 API 키를 자동 발급합니다.
 
-<p>[English](../README.md) · [Indonesia](README.id.md) · [简体中文](README.zh.md) · [日本語](README.ja.md) · **한국어** · [Español](README.es.md)</p>
+<p><a href="../README.md">English</a> · <a href="README.id.md">Indonesia</a> · <a href="README.zh.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <strong>한국어</strong> · <a href="README.es.md">Español</a></p>
 
 ---
 

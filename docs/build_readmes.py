@@ -33,6 +33,8 @@ LANG_NAMES = [
 
 
 def switcher(active: str) -> str:
+    """Return an HTML language switcher that renders reliably inside <p>."""
+
     parts = []
     for code, name in LANG_NAMES:
         if code == "en":
@@ -40,9 +42,9 @@ def switcher(active: str) -> str:
         else:
             target = f"readme/README.{code}.md" if active == "en" else f"README.{code}.md"
         if code == active:
-            parts.append(f"**{name}**")
+            parts.append(f'<strong>{name}</strong>')
         else:
-            parts.append(f"[{name}]({target})")
+            parts.append(f'<a href="{target}">{name}</a>')
     return " · ".join(parts)
 
 

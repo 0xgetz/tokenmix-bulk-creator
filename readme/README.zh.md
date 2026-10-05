@@ -10,7 +10,7 @@
 
 > 使用一次性邮箱批量创建 TokenMix 账号，并自动生成随机命名的 API 密钥。
 
-<p>[English](../README.md) · [Indonesia](README.id.md) · **简体中文** · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md)</p>
+<p><a href="../README.md">English</a> · <a href="README.id.md">Indonesia</a> · <strong>简体中文</strong> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a></p>
 
 ---
 

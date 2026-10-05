@@ -10,7 +10,7 @@
 
 > Crea cuentas de TokenMix en lote con bandejas desechables y genera automáticamente claves API con nombres aleatorios.
 
-<p>[English](../README.md) · [Indonesia](README.id.md) · [简体中文](README.zh.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · **Español**</p>
+<p><a href="../README.md">English</a> · <a href="README.id.md">Indonesia</a> · <a href="README.zh.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <strong>Español</strong></p>
 
 ---
 
